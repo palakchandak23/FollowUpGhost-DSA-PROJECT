@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class EmailTrackerApp {
 
     private static final EmailService service = new EmailService();
+
     private static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -76,8 +77,8 @@ public class EmailTrackerApp {
     private static void addCommitmentForEmail(String emailId, String senderName) {
         System.out.println("\n--- Add Commitment ---");
         System.out.println(" Sender: " + senderName);
-        System.out.println(" 1. Natural language (e.g. I will send report by tomorrow)");
-        System.out.println(" 2. Quick date (enter description + deadline separately)");
+        System.out.println(" 1. Natural language (for ex. I will send report by tomorrow)");
+        System.out.println(" 2. Keywords (enter description + deadline separately)");
         System.out.print(" Choose (1/2): ");
         String type = sc.nextLine().trim();
 
@@ -125,32 +126,32 @@ public class EmailTrackerApp {
 
     private static void printMainMenu() {
         System.out.println("\n+--------------------------------------+");
-        System.out.println("|     EMAIL COMMITMENT TRACKER         |");
+        System.out.println("|     EMAIL COMMITMENT TRACKER          |");
         System.out.println("+--------------------------------------+");
         System.out.println("|  1. Add incoming email               |");
-        System.out.println("|  2. Open an email                    |");
-        System.out.println("|  3. Add commitment to email          |");
-        System.out.println("|  4. View commitments                 |");
+        System.out.println("|  2. Open an email                     |");
+        System.out.println("|  3. Add commitment to email           |");
+        System.out.println("|  4. View commitments                  |");
         System.out.println("|  5. Mark commitment as done          |");
-        System.out.println("|  6. Missed email summary             |");
-        System.out.println("|  7. Statistics dashboard             |");
-        System.out.println("|  0. Exit                             |");
-        System.out.println("+--------------------------------------+");
+        System.out.println("|  6. Missed email summary              |");
+        System.out.println("|  7. Statistics dashboard              |");
+        System.out.println("|  0. Exit                              |");
+        System.out.println("+-------------------------------------+");
         System.out.print("  Choice: ");
     }
 
     private static void printBanner() {
-        System.out.println("\n+================================================+");
-        System.out.println("|   FollowUp Ghost- Smart Email Notification Tracker    |");
-        System.out.println("+================================================+");
+        System.out.println("\n================================================");
+        System.out.println("  FollowUp Ghost- Smart Email Notification Tracker ");
+        System.out.println("================================================");
     }
 
     private static void seedDemoData() {
         System.out.println("\n Loading demo data...");
-        Email e1 = service.addEmail("Rahul Sharma", "Project Report Due", "Please send the report by tomorrow EOD.");
-        Email e2 = service.addEmail("Priya Mehta", "Meeting Reminder", "Team sync this Friday, confirm attendance.");
-        Email e3 = service.addEmail("Amit Verma", "Invoice Pending", "Invoice overdue. Please process asap.");
-        Email e4 = service.addEmail("Sneha Joshi", "Code Review", "Review my pull request by end of week.");
+        Email e1 = service.addEmail("Rahul Sharma", "Project Report Due", "Please send the report by tomorrow.");
+        Email e2 = service.addEmail("Priya Mehta", "Meeting Reminder", "Team meet this Friday, confirm attendance.");
+        Email e3 = service.addEmail("Khushi Chitlange", "Invoice Pending", "Invoice overdue. Please process asap.");
+        Email e4 = service.addEmail("Palak Chandak", "Code Review", "Review my pull request by end of week.");
 
         service.markEmailMissed(e3.id);
         service.markEmailMissed(e4.id);
@@ -159,8 +160,8 @@ public class EmailTrackerApp {
         service.addNaturalLanguageCommitment(e1.id, "Rahul Sharma", "I will send the report by tomorrow");
 
         service.markEmailSeen(e2.id);
-        service.addKeywordCommitment(e2.id, "Priya Mehta", "Confirm attendance for team sync", "friday");
+        service.addKeywordCommitment(e2.id, "Priya Mehta", "Confirm attendance for team meet", "friday");
 
-        System.out.println(" Demo loaded: 4 emails, 2 commitments, 2 missed.\n");
+        System.out.println("4 emails, 2 commitments, 2 missed.\n");
     }
 }
